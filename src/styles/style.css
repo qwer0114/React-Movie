@@ -1,0 +1,18 @@
+body {
+  background-image: url("../img/cool-background.png");
+  color: white;
+}
+
+.layout {
+  margin: 0 auto;
+  width: 70%;
+}
+
+a {
+  color: white;
+  text-decoration: none;
+}
+
+.navBar {
+  border-bottom: 1px solid white;
+}
