@@ -35,13 +35,8 @@ function Home() {
     setUpComingMovies(upComingJson.results);
   };
 
-  const getVideo = async () => {
-    popularMovies.map((movie) => setVideo(movie.id));
-  };
-
   useEffect(() => {
     getMovies();
-    getVideo();
   }, []);
 
   return (
