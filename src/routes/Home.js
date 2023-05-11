@@ -20,6 +20,7 @@ function Home() {
     );
     const popularJson = await popular.json();
     setpopularMovies(popularJson.results);
+    console.log(popularJson.results);
 
     const topRate = await fetch(
       `${API_URL}movie/top_rated?api_key=${API_Key}&language=ko-KR`
