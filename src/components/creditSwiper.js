@@ -9,13 +9,13 @@ import { directive } from "@babel/types";
 
 SwiperCore.use([Navigation, Mousewheel]);
 
-function MovieSwiper({ movie }) {
+function CreditSwiper({ credit }) {
   return (
     <div>
       <Swiper
         grabCursor={true}
-        slidesPerView={4}
-        slidesPerGroup={2}
+        slidesPerView="5"
+        spaceBetween={0}
         slideToClickedSlide={true}
         // 네비게이션 버튼
         mousewheel={true} // 마우스 휠
@@ -24,13 +24,19 @@ function MovieSwiper({ movie }) {
         navigation
         speed={500}
       >
-        {movie.map((movie) => (
+        {credit.map((credit) => (
           <SwiperSlide>
-            <Movie
-              title={movie.original_title}
-              posterUrl={movie.poster_path}
-              id={movie.id}
-            />
+            <div>
+              <img
+                src={`https://image.tmdb.org/t/p/w200/${credit.profile_path}`}
+                alt="No Image"
+                style={{ width: "150px" }}
+              ></img>
+              <div>
+                <div>{credit.name}</div>
+                <div>{credit.character}</div>
+              </div>
+            </div>
           </SwiperSlide>
         ))}
       </Swiper>
@@ -38,4 +44,4 @@ function MovieSwiper({ movie }) {
   );
 }
 
-export default MovieSwiper;
+export default CreditSwiper;

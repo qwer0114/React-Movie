@@ -2,7 +2,7 @@ import { async } from "q";
 import { useState, useEffect } from "react";
 import { useParams } from "react-router";
 import Movie from "../components/Movie";
-import movieCSS from "../styles/movie.module.css";
+import CreditSwiper from "../components/creditSwiper";
 
 // 디테일에서 나와야 하는 정보 -> 영화 정보, 영화 포스터 , 영화 제목 , 배우 출연진 / 비슷한 작품 ?
 
@@ -13,6 +13,7 @@ function MovieDetail() {
   let { id } = useParams();
   const [movieDetail, setMovieDetail] = useState([]);
   const [genres, setGenres] = useState([]);
+  const [credit, setCredit] = useState([]);
 
   const getMovieDetail = async () => {
     const result = await fetch(`${API_URL}/movie/${id}?api_key=${API_Key}`);
@@ -20,12 +21,22 @@ function MovieDetail() {
     setMovieDetail(json);
     console.log(movieDetail);
     console.log(json);
-    console.log(json.genres[0].name);
+
     setGenres(json.genres);
+  };
+
+  const getCredit = async () => {
+    const result = await fetch(
+      `${API_URL}/movie/${id}/credits?api_key=${API_Key}`
+    );
+    const json = await result.json();
+    setCredit(json.cast);
+    console.log(json.cast);
   };
 
   useEffect(() => {
     getMovieDetail();
+    getCredit();
   }, []);
   return (
     <div id="detail_layout">
@@ -33,7 +44,7 @@ function MovieDetail() {
         <img
           src={`${IMAGE_BASE_URL}${movieDetail.backdrop_path}`}
           alt="backdrop_path"
-          className={movieCSS.back_drop}
+          className="back_drop"
         ></img>
       </div>
       <div id="movie_detail">
@@ -48,6 +59,11 @@ function MovieDetail() {
           ))}
           <div>{movieDetail.overview}</div>
         </div>
+      </div>
+
+      <div id="credit">
+        <div>Actors</div>
+        <CreditSwiper credit={credit}></CreditSwiper>
       </div>
     </div>
   );

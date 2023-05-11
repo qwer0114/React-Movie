@@ -1,19 +1,12 @@
-#detail_layout {
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  background-color: rgb(37, 35, 35);
-}
-#image {
-  text-align: center;
-  position: relative;
+.back_drop {
+  width: 800px;
 }
 
-.movie {
-  position: absolute;
-  top: 300px;
-  left: 500px;
+#image {
+  text-align: center;
+  background-image: linear-gradient(to right, #434343 0%, black 100%);
 }
-#movie_detail {
-  background-color: black;
+
+#credit {
+  width: 70%;
 }
