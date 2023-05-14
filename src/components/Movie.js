@@ -11,7 +11,7 @@ function Movie({ title, posterUrl, id }) {
       <img
         src={`${IMAGE_BASE_URL}${posterUrl}`}
         alt="Title"
-        className={`poster ${movie.poster}`}
+        className={` ${movie.poster}`}
       ></img>
       <h2>
         <Link to={`/movie/${id}`} className={movie.movieTitle}>

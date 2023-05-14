@@ -16,7 +16,9 @@ function MovieDetail() {
   const [credit, setCredit] = useState([]);
 
   const getMovieDetail = async () => {
-    const result = await fetch(`${API_URL}/movie/${id}?api_key=${API_Key}`);
+    const result = await fetch(
+      `${API_URL}/movie/${id}?api_key=${API_Key}&language=ko-KR`
+    );
     const json = await result.json();
     setMovieDetail(json);
     console.log(movieDetail);
@@ -27,7 +29,7 @@ function MovieDetail() {
 
   const getCredit = async () => {
     const result = await fetch(
-      `${API_URL}/movie/${id}/credits?api_key=${API_Key}`
+      `${API_URL}/movie/${id}/credits?api_key=${API_Key}&language=ko-KR`
     );
     const json = await result.json();
     setCredit(json.cast);
@@ -40,27 +42,40 @@ function MovieDetail() {
   }, []);
   return (
     <div id="detail_layout">
-      <div id="image">
-        <img
-          src={`${IMAGE_BASE_URL}${movieDetail.backdrop_path}`}
-          alt="backdrop_path"
-          className="back_drop"
-        ></img>
-      </div>
-      <div id="movie_detail">
-        <Movie
-          title={movieDetail.title}
-          posterUrl={movieDetail.poster_path}
-          id={movieDetail.id}
-        />
-        <div>
-          {genres.map((genre) => (
-            <span>{genre.name}/ </span>
-          ))}
-          <div>{movieDetail.overview}</div>
+      <div
+        id="background"
+        style={{
+          backgroundImage: `url(${IMAGE_BASE_URL}${movieDetail.backdrop_path})`,
+        }}
+      >
+        <div id="filter">
+          <div id="movie_detail">
+            <div id="movie_detail_poster">
+              <img
+                src={`${IMAGE_BASE_URL}${movieDetail.poster_path}`}
+                className="poster"
+              ></img>
+            </div>
+            <div id="movie_detail_info">
+              <div id="movie_detail_info_title">
+                <h1>{movieDetail.title}</h1>
+                <div id="movie_detail_info_facts">
+                  <div>{movieDetail.release_date} </div>
+                  <div>
+                    {genres.map((genre) => (
+                      <span id="genre">{genre.name}/</span>
+                    ))}
+                  </div>
+                  <div> {movieDetail.runtime}m</div>
+                </div>
+              </div>
+              <div>인기도: {movieDetail.popularity}</div>
+              <div>개요</div>
+              <div id="overview">{movieDetail.overview}</div>
+            </div>
+          </div>
         </div>
       </div>
-
       <div id="credit">
         <div>Actors</div>
         <CreditSwiper credit={credit}></CreditSwiper>
