@@ -1,4 +1,7 @@
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR&family=Orbitron&display=swap");
+
 body {
+  font-family: "Noto Sans KR", sans-serif;
   background-image: url("../img/cool-background.png");
   color: white;
 }

@@ -1,4 +1,3 @@
-@import url("https://fonts.googleapis.com/css2?family=Libre+Baskerville&display=swap");
 .movie {
   text-align: center;
 
@@ -7,6 +6,5 @@
 }
 
 .movieTitle {
-  font-family: "Libre Baskerville", serif;
   font-size: 15px;
 }

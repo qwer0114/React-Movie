@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { useParams } from "react-router";
 import Movie from "../components/Movie";
 import CreditSwiper from "../components/creditSwiper";
+import MovieSwiper from "../components/MovieSwiper";
 
 // 디테일에서 나와야 하는 정보 -> 영화 정보, 영화 포스터 , 영화 제목 , 배우 출연진 / 비슷한 작품 ?
 
@@ -12,6 +13,7 @@ function MovieDetail() {
   const IMAGE_BASE_URL = "https://image.tmdb.org/t/p/original/";
   let { id } = useParams();
   const [movieDetail, setMovieDetail] = useState([]);
+  const [similarMovies, setSimilarMovies] = useState([]);
   const [genres, setGenres] = useState([]);
   const [credit, setCredit] = useState([]);
 
@@ -21,10 +23,17 @@ function MovieDetail() {
     );
     const json = await result.json();
     setMovieDetail(json);
-    console.log(movieDetail);
-    console.log(json);
-
     setGenres(json.genres);
+    getSimilarMovie(json.genres);
+  };
+
+  const getSimilarMovie = async (genres) => {
+    const result = await fetch(
+      `${API_URL}/discover/movie?api_key=${API_Key}&include_adult=false&language=ko-KR&sort_by=popularity.desc&with_genres=${genres[0].id}&${genres[1].id}`
+    );
+    const json = await result.json();
+    setSimilarMovies(json.results);
+    console.log(json.results);
   };
 
   const getCredit = async () => {
@@ -39,7 +48,7 @@ function MovieDetail() {
   useEffect(() => {
     getMovieDetail();
     getCredit();
-  }, []);
+  });
   return (
     <div id="detail_layout">
       <div
@@ -79,6 +88,10 @@ function MovieDetail() {
       <div id="credit">
         <div>Actors</div>
         <CreditSwiper credit={credit}></CreditSwiper>
+      </div>
+      <div id="similarMovies">
+        <h2>Similar Movies</h2>
+        <MovieSwiper movie={similarMovies} />
       </div>
     </div>
   );
