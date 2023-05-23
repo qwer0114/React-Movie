@@ -25,11 +25,13 @@ function MovieSwiper({ movie }) {
         speed={500}
       >
         {movie.map((movie) => (
-          <SwiperSlide>
+          <SwiperSlide key={movie.id}>
             <Movie
-              title={movie.title}
+              title={movie.title ? movie.title : movie.name}
+
               posterUrl={movie.poster_path}
               id={movie.id}
+
             />
           </SwiperSlide>
         ))}

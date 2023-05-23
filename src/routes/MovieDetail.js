@@ -4,9 +4,11 @@ import { useParams } from "react-router";
 import Movie from "../components/Movie";
 import CreditSwiper from "../components/creditSwiper";
 import MovieSwiper from "../components/MovieSwiper";
+import Navbar from "../components/navbar";
 
 // 디테일에서 나와야 하는 정보 -> 영화 정보, 영화 포스터 , 영화 제목 , 배우 출연진 / 비슷한 작품 ?
 let releaseDate;
+let cutDate;
 function MovieDetail() {
   const API_Key = "e57cb5455543dca5e39dbdf67e3877a8";
   const API_URL = "https://api.themoviedb.org/3/";
@@ -25,6 +27,8 @@ function MovieDetail() {
     setMovieDetail(json);
     setGenres(json.genres);
     getSimilarMovie(json.genres);
+    console.log(json)
+
   };
 
   const getSimilarMovie = async (genres) => {
@@ -49,51 +53,54 @@ function MovieDetail() {
     getMovieDetail();
     getCredit();
   }, [id]);
-  releaseDate = (movieDetail.release_date) + "";
-  let cutDate = releaseDate.substr(0, 4);
 
   return (
-    <div id="detail_layout">
-      <div
-        id="background"
-        style={{
-          backgroundImage: `url(${IMAGE_BASE_URL}${movieDetail.backdrop_path})`,
-        }}
-      >
-        <div id="filter">
-          <div id="movie_detail">
-            <div id="movie_detail_poster">
-              <img
-                src={`${IMAGE_BASE_URL}${movieDetail.poster_path}`}
-                className="poster"
-              ></img>
-            </div>
-            <div id="movie_detail_info">
-              <div id="movie_detail_info_title">
-                <h1>{movieDetail.title}({cutDate})</h1>
+    <div>
+      <Navbar></Navbar>
+      <div id="detail_layout">
+        <div
+          id="background"
+          style={{
+            backgroundImage: `url(${IMAGE_BASE_URL}${movieDetail.backdrop_path})`,
+          }}
+        >
+          <div id="filter">
+            <div id="movie_detail">
+              <div id="movie_detail_poster">
+                <img
+                  src={`${IMAGE_BASE_URL}${movieDetail.poster_path}`}
+                  className="poster"
+                ></img>
+              </div>
+              <div id="movie_detail_info">
+                <div id="movie_detail_info_title">
+                  <div id="title">{movieDetail.title}?{movieDetail.title}</div>
+
+                </div>
                 <div id="movie_detail_info_facts">
                   <div>
                     {genres.map((genre) => (
-                      <span id="genre">·{genre.name}</span>
+                      <span id="genre" key={genre.id}>·{genre.name}</span>
                     ))}
                   </div>
-                  <div> {movieDetail.runtime}m</div>
-                  <div>인기도: {movieDetail.popularity}</div>
+                  <div>{movieDetail.runtime}m</div>
+                  {/* <div>인기도: {movieDetail.popularity}</div> */}
                 </div>
-              </div>
-              <div>개요</div>
-              <div id="overview">{movieDetail.overview}</div>
+                <div className="movie_detail_tagline">{movieDetail.tagline}</div>
+                <div>개요</div>
+                <div id="overview">{movieDetail.overview}</div>
 
+              </div>
             </div>
           </div>
         </div>
-      </div>
-      <div id="credit">
-        <h2>Actors</h2>
-        <CreditSwiper credit={credit}></CreditSwiper>
-        <div id="similarMovies">
-          <h2>Similar Movies</h2>
-          <MovieSwiper movie={similarMovies} />
+        <div id="credit">
+          <h2>Actors</h2>
+          <CreditSwiper credit={credit}></CreditSwiper>
+          <div id="similarMovies">
+            <h2>Similar Movies</h2>
+            <MovieSwiper movie={similarMovies} />
+          </div>
         </div>
       </div>
     </div>

@@ -6,6 +6,7 @@ import { directive } from "@babel/types";
 import movieCSS from "../styles/movie.module.css";
 import "../styles/style.css";
 import MovieSwiper from "../components/MovieSwiper";
+import Navbar from "../components/navbar";
 
 function Home() {
   const API_Key = "e57cb5455543dca5e39dbdf67e3877a8";
@@ -41,11 +42,7 @@ function Home() {
 
   return (
     <div className="layout">
-      <div className="navBar">
-        <nav>
-          <h1>Watcher</h1>
-        </nav>
-      </div>
+      <Navbar></Navbar>
       <div className={movieCSS.movieChart}>
         <h2>Popular</h2>
         <MovieSwiper movie={popularMovies} />
