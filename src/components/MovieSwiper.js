@@ -27,8 +27,7 @@ function MovieSwiper({ movie }) {
         {movie.map((movie) => (
           <SwiperSlide key={movie.id}>
             <Movie
-              title={movie.title ? movie.title : movie.name}
-
+              title={movie.title != undefined ? movie.title : movie.name}
               posterUrl={movie.poster_path}
               id={movie.id}
 

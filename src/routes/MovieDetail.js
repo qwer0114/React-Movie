@@ -27,7 +27,7 @@ function MovieDetail() {
     setMovieDetail(json);
     setGenres(json.genres);
     getSimilarMovie(json.genres);
-    console.log(json)
+
 
   };
 
@@ -37,7 +37,7 @@ function MovieDetail() {
     );
     const json = await result.json();
     setSimilarMovies(json.results);
-    console.log(json.results);
+
   };
 
   const getCredit = async () => {
@@ -46,7 +46,7 @@ function MovieDetail() {
     );
     const json = await result.json();
     setCredit(json.cast);
-    console.log(json.cast);
+
   };
 
   useEffect(() => {
@@ -74,7 +74,7 @@ function MovieDetail() {
               </div>
               <div id="movie_detail_info">
                 <div id="movie_detail_info_title">
-                  <div id="title">{movieDetail.title}?{movieDetail.title}</div>
+                  <div id="title">{movieDetail.title}</div>
 
                 </div>
                 <div id="movie_detail_info_facts">
