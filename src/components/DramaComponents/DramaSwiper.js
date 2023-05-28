@@ -3,19 +3,20 @@ import SwiperCore, { Navigation, Mousewheel } from "swiper";
 import "swiper/css"; //basic
 import "swiper/css/navigation";
 import "swiper/css/pagination";
-import Movie from "./Movie";
+
 import { async } from "q";
 import { directive } from "@babel/types";
+import Drama from "./Drama";
 
 SwiperCore.use([Navigation, Mousewheel]);
 
-function CreditSwiper({ credit }) {
+function DramaSwiper({ drama }) {
   return (
     <div>
       <Swiper
         grabCursor={true}
-        slidesPerView="5"
-        spaceBetween={0}
+        slidesPerView={4}
+        slidesPerGroup={2}
         slideToClickedSlide={true}
         // 네비게이션 버튼
         mousewheel={true} // 마우스 휠
@@ -24,19 +25,13 @@ function CreditSwiper({ credit }) {
         navigation
         speed={500}
       >
-        {credit.map((credit) => (
-          <SwiperSlide>
-            <div>
-              <img
-                src={`https://image.tmdb.org/t/p/w200/${credit.profile_path}`}
-                alt="No Image"
-                style={{ width: "150px" }}
-              ></img>
-              <div>
-                <div>{credit.name}</div>
-                <div>{credit.character}</div>
-              </div>
-            </div>
+        {drama.map((drama) => (
+          <SwiperSlide key={drama.id}>
+            <Drama
+              name={drama.name}
+              posterUrl={drama.poster_path}
+              id={drama.id}
+            />
           </SwiperSlide>
         ))}
       </Swiper>
@@ -44,4 +39,4 @@ function CreditSwiper({ credit }) {
   );
 }
 
-export default CreditSwiper;
+export default DramaSwiper;

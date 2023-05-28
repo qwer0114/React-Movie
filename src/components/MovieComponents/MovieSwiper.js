@@ -24,16 +24,17 @@ function MovieSwiper({ movie }) {
         navigation
         speed={500}
       >
-        {movie.map((movie) => (
-          <SwiperSlide key={movie.id}>
-            <Movie
-              title={movie.title != undefined ? movie.title : movie.name}
-              posterUrl={movie.poster_path}
-              id={movie.id}
-
-            />
-          </SwiperSlide>
-        ))}
+        {movie
+          .filter((movie) => movie.poster_path !== null)
+          .map((movie) => (
+            <SwiperSlide key={movie.id}>
+              <Movie
+                title={movie.title}
+                posterUrl={movie.poster_path}
+                id={movie.id}
+              />
+            </SwiperSlide>
+          ))}
       </Swiper>
     </div>
   );

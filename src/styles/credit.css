@@ -1,0 +1,33 @@
+.credit {
+  display: flex;
+  width: 70%;
+  height: 10%;
+  margin: 0 auto;
+  padding-top: 0px;
+}
+
+.credit_facts {
+  width: 300px;
+  padding-right: 200px;
+}
+
+.credit_profile {
+  width: 250px;
+  border: 1px solid black;
+  border-radius: 10px;
+}
+
+.credit_right {
+  width: 70%;
+}
+
+.biography_title {
+  font-size: 30px;
+  font-weight: 700;
+}
+.credit_biography {
+  display: -webkit-box;
+  -webkit-line-clamp: 5;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}

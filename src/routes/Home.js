@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
-import Movie from "../components/Movie";
+
 import { async } from "q";
 
 import { directive } from "@babel/types";
 import movieCSS from "../styles/movie.module.css";
 import "../styles/style.css";
-import MovieSwiper from "../components/MovieSwiper";
+import MovieSwiper from "../components/MovieComponents/MovieSwiper";
 import Navbar from "../components/navbar";
 
 function Home() {

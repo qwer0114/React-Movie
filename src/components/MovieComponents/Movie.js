@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
-import movie from "../styles/movie.module.css";
-import movieDetail from "../styles/movieDetail.css";
-import "../styles/style.css";
+import movie from "../../styles/movie.module.css";
+
+import "../../styles/style.css";
 import { async } from "q";
 
 function Movie({ title, posterUrl, id }) {

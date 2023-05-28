@@ -1,10 +1,11 @@
 import { async } from "q";
 import { useState, useEffect } from "react";
 import { useParams } from "react-router";
-import Movie from "../components/Movie";
-import CreditSwiper from "../components/creditSwiper";
-import MovieSwiper from "../components/MovieSwiper";
+import Movie from "../components/MovieComponents/Movie";
+import CreditSwiper from "../components/MovieComponents/CreditSwiper";
+import MovieSwiper from "../components/MovieComponents/MovieSwiper";
 import Navbar from "../components/navbar";
+import movieDetail from "../styles/movieDetail.css";
 
 // 디테일에서 나와야 하는 정보 -> 영화 정보, 영화 포스터 , 영화 제목 , 배우 출연진 / 비슷한 작품 ?
 let releaseDate;
@@ -27,8 +28,6 @@ function MovieDetail() {
     setMovieDetail(json);
     setGenres(json.genres);
     getSimilarMovie(json.genres);
-
-
   };
 
   const getSimilarMovie = async (genres) => {
@@ -37,7 +36,6 @@ function MovieDetail() {
     );
     const json = await result.json();
     setSimilarMovies(json.results);
-
   };
 
   const getCredit = async () => {
@@ -46,7 +44,6 @@ function MovieDetail() {
     );
     const json = await result.json();
     setCredit(json.cast);
-
   };
 
   useEffect(() => {
@@ -75,21 +72,23 @@ function MovieDetail() {
               <div id="movie_detail_info">
                 <div id="movie_detail_info_title">
                   <div id="title">{movieDetail.title}</div>
-
                 </div>
                 <div id="movie_detail_info_facts">
                   <div>
                     {genres.map((genre) => (
-                      <span id="genre" key={genre.id}>·{genre.name}</span>
+                      <span id="genre" key={genre.id}>
+                        ·{genre.name}
+                      </span>
                     ))}
                   </div>
                   <div>{movieDetail.runtime}m</div>
                   {/* <div>인기도: {movieDetail.popularity}</div> */}
                 </div>
-                <div className="movie_detail_tagline">{movieDetail.tagline}</div>
+                <div className="movie_detail_tagline">
+                  {movieDetail.tagline}
+                </div>
                 <div>개요</div>
                 <div id="overview">{movieDetail.overview}</div>
-
               </div>
             </div>
           </div>

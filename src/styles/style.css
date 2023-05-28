@@ -5,6 +5,9 @@ body {
   background-image: url("../img/cool-background.png");
   color: white;
 }
+#root {
+  width: 100%;
+}
 
 .layout {
   margin: 0 auto;
@@ -16,10 +19,10 @@ a {
   text-decoration: none;
 }
 
-a:hover{
-    font-size: 20px;
+a:hover {
+  font-size: 20px;
 }
 
-ul{
-  list-style:none;
+ul {
+  list-style: none;
 }
