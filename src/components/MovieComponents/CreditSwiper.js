@@ -10,10 +10,10 @@ function CreditSwiper({ credit }) {
   const IMAGE_BASE_URL = "https://image.tmdb.org/t/p/original/";
   console.log(credit);
   return (
-    <div id="credit">
+    <div id="credits">
       <Swiper
         grabCursor={true}
-        slidesPerView={4}
+        slidesPerView={5}
         slidesPerGroup={2}
         slideToClickedSlide={true}
         // 네비게이션 버튼
@@ -26,13 +26,18 @@ function CreditSwiper({ credit }) {
         {credit
           .filter((credit) => credit.profile_path !== null)
           .map((credit) => (
-            <SwiperSlide>
+            <SwiperSlide key={credit.id}>
               <img
                 src={`${IMAGE_BASE_URL}${credit.profile_path}`}
                 className={`${creditCSS.credit_profile}`}
               ></img>
-              <div>
-                <Link to={`/credit/${credit.id}`}>{credit.name}</Link>
+              <div className={`${creditCSS.credit_Names}`}>
+                <div className={`${creditCSS.credit_realName}`}>
+                  <Link to={`/credit/${credit.id}`}>{credit.name}</Link>
+                </div>
+                <div className={`${creditCSS.credit_charcterName}`}>
+                  {credit.character}
+                </div>
               </div>
             </SwiperSlide>
           ))}

@@ -56,23 +56,25 @@ function Netflix() {
     getKDrama();
   }, []);
   return (
-    <div>
+    <div className="layout">
       <Navbar></Navbar>
-      <div className={movieCSS.movieChart}>
-        <h2>Popular</h2>
-        <MovieSwiper movie={movies} />
-      </div>
-      <div className={movieCSS.movieChart}>
-        <h2>KR Popular</h2>
-        <MovieSwiper movie={KRmovies} />
-      </div>
-      <div className={movieCSS.movieChart}>
-        <h2>Drama</h2>
-        <DramaSwiper drama={drama} />
-      </div>
-      <div className={movieCSS.movieChart}>
-        <h2>K Drama</h2>
-        <DramaSwiper drama={Kdrama} />
+      <div className="movies">
+        <div className={movieCSS.movieChart}>
+          <h2>Popular</h2>
+          <MovieSwiper movie={movies} />
+        </div>
+        <div className={movieCSS.movieChart}>
+          <h2>KR Popular</h2>
+          <MovieSwiper movie={KRmovies} />
+        </div>
+        <div className={movieCSS.movieChart}>
+          <h2>Drama</h2>
+          <DramaSwiper drama={drama} />
+        </div>
+        <div className={movieCSS.movieChart}>
+          <h2>K Drama</h2>
+          <DramaSwiper drama={Kdrama} />
+        </div>
       </div>
     </div>
   );

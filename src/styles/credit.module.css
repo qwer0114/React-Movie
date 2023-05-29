@@ -1,3 +1,17 @@
 .credit_profile {
-  width: 200px;
+  width: 150px;
+  border-radius: 10px;
+}
+
+.credit_Names {
+  height: 100px;
+}
+
+.credit_realName {
+  font: 25px;
+  font-weight: 1000;
+}
+
+.credit_charcterName {
+  font-size: 13px;
 }

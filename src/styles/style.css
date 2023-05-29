@@ -1,9 +1,10 @@
 @import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR&family=Orbitron&display=swap");
-@import "./nav.css";
+
 body {
   font-family: "Noto Sans KR", sans-serif;
   background-image: url("../img/cool-background.png");
   color: white;
+  position: relative;
 }
 #root {
   width: 100%;
@@ -11,7 +12,14 @@ body {
 
 .layout {
   margin: 0 auto;
+  width: 100%;
+  position: relative;
+  padding-top: 100px;
+}
+
+.movies {
   width: 70%;
+  margin: 0 auto;
 }
 
 a {

@@ -15,7 +15,7 @@ function DramaSwiper({ drama }) {
     <div>
       <Swiper
         grabCursor={true}
-        slidesPerView={4}
+        slidesPerView={5}
         slidesPerGroup={2}
         slideToClickedSlide={true}
         // 네비게이션 버튼

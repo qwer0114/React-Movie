@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-
+import "../node_modules/react-modal-video/scss/modal-video.scss";
 import MovieDetail from "./routes/MovieDetail";
 import Home from "./routes/Home";
 import Netflix from "./routes/Netflix";

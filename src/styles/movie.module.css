@@ -1,10 +1,13 @@
 .movie {
   text-align: center;
-
   height: 400px;
   padding-top: 20px;
 }
 
 .movieTitle {
   font-size: 15px;
+}
+
+.poster {
+  border-radius: 10px;
 }

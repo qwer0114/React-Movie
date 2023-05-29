@@ -43,19 +43,21 @@ function Home() {
   return (
     <div className="layout">
       <Navbar></Navbar>
-      <div className={movieCSS.movieChart}>
-        <h2>Popular</h2>
-        <MovieSwiper movie={popularMovies} />
-      </div>
+      <div className="movies">
+        <div className={movieCSS.movieChart}>
+          <h2>Popular</h2>
+          <MovieSwiper movie={popularMovies} />
+        </div>
 
-      <div className={movieCSS.movieChart}>
-        <h2>Top Rate</h2>
-        <MovieSwiper movie={topRatedMovies} />
-      </div>
+        <div className={movieCSS.movieChart}>
+          <h2>Top Rate</h2>
+          <MovieSwiper movie={topRatedMovies} />
+        </div>
 
-      <div className={movieCSS.movieChart}>
-        <h2>Upcoming</h2>
-        <MovieSwiper movie={upComingMovies} />
+        <div className={movieCSS.movieChart}>
+          <h2>Upcoming</h2>
+          <MovieSwiper movie={upComingMovies} />
+        </div>
       </div>
     </div>
   );

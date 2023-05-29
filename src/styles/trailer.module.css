@@ -1,0 +1,26 @@
+.trailers {
+  display: flex;
+}
+
+.video {
+  position: relative;
+  height: 0;
+  padding-bottom: 56.25%;
+}
+
+.iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: none;
+}
+
+.thumbnail {
+  width: 533px;
+  height: 300px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
