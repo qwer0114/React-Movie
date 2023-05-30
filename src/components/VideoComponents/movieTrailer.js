@@ -9,17 +9,10 @@ import trailerCSS from "../../styles/trailer.module.css";
 import Video from "./Video";
 
 function MovieTrailer({ videos }) {
-  const showVideo = (id) => {
-    console.log(id);
-  };
   console.log(videos);
   return (
     <div className={`${trailerCSS.trailers}`}>
-      {videos
-        .filter((video) => video.type === "Trailer")
-        .map((video) => (
-          <Video videoKey={video.key} />
-        ))}
+      {<Video videoKey={videos} />}
     </div>
   );
 }

@@ -50,10 +50,12 @@ function MovieDetail() {
 
   const getTrailer = async () => {
     const result = await fetch(
-      `${API_URL}/movie/${id}/videos?api_key=${API_Key}&language=ko-KR`
+      `${API_URL}/movie/${id}/videos?api_key=${API_Key}`
     );
     const json = await result.json();
-    setTrailer(json.results);
+    const array = json.results;
+    const key = array.filter((video) => video.type === "Teaser" || "Trailer");
+    setTrailer(key[0].key);
   };
 
   useEffect(() => {
