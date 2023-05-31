@@ -7,6 +7,7 @@ import DramaSwiper from "../components/DramaComponents/DramaSwiper";
 import Navbar from "../components/navbar";
 import detailCSS from "../styles/detail.module.css";
 import movieDetail from "../styles/movieDetail.css";
+import MovieTrailer from "../components/VideoComponents/MovieTrailer";
 function DramaDetail() {
   const API_Key = "e57cb5455543dca5e39dbdf67e3877a8";
   const API_URL = "https://api.themoviedb.org/3/";
@@ -17,6 +18,7 @@ function DramaDetail() {
   const [seasons, setSeasons] = useState([]);
   const [credit, setCredit] = useState([]);
   const [similarDramas, setSimilarDramas] = useState([]);
+  const [trailer, setTrailer] = useState([]);
 
   const getDramaDetail = async () => {
     const result = await fetch(
@@ -41,10 +43,20 @@ function DramaDetail() {
     const json = await result.json();
     setSimilarDramas(json.results);
   };
+  const getTrailer = async () => {
+    const result = await fetch(
+      `${API_URL}/tv/${id}/videos?api_key=${API_Key}`
+    );
+    const json = await result.json();
+    const array = json.results;
+    const key = array.filter((video) => video.type === "Teaser" || "Trailer");
+    setTrailer(key[0].key);
+  };
   useEffect(() => {
     getDramaDetail();
     getCredit();
     getSimilarMovie();
+    getTrailer();
   }, [id]);
 
   return (
@@ -79,6 +91,7 @@ function DramaDetail() {
                 <div>개요</div>
                 <div>{dramaDetail.overview}</div>
                 <Season seasons={seasons} />
+                <MovieTrailer videos={trailer}></MovieTrailer>
               </div>
             </div>
           </div>

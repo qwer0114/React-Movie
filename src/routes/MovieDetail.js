@@ -5,7 +5,8 @@ import Movie from "../components/MovieComponents/Movie";
 import CreditSwiper from "../components/MovieComponents/CreditSwiper";
 import MovieSwiper from "../components/MovieComponents/MovieSwiper";
 import Navbar from "../components/navbar";
-import MovieTrailer from "../components/VideoComponents/movieTrailer";
+
+import Detail from "../components/Detail";
 
 import detailCSS from "../styles/detail.module.css";
 
@@ -20,7 +21,7 @@ function MovieDetail() {
   const [similarMovies, setSimilarMovies] = useState([]);
   const [genres, setGenres] = useState([]);
   const [credit, setCredit] = useState([]);
-  const [trailer, setTrailer] = useState([]);
+
 
   const getMovieDetail = async () => {
     const result = await fetch(
@@ -48,63 +49,19 @@ function MovieDetail() {
     setCredit(json.cast);
   };
 
-  const getTrailer = async () => {
-    const result = await fetch(
-      `${API_URL}/movie/${id}/videos?api_key=${API_Key}`
-    );
-    const json = await result.json();
-    const array = json.results;
-    const key = array.filter((video) => video.type === "Teaser" || "Trailer");
-    setTrailer(key[0].key);
-  };
+
 
   useEffect(() => {
     getMovieDetail();
     getCredit();
-    getTrailer();
+
   }, [id]);
 
   return (
     <div className={`${detailCSS.detail}`}>
       <Navbar></Navbar>
       <div id="detail_layout">
-        <div
-          className={`${detailCSS.background}`}
-          style={{
-            backgroundImage: `url(${IMAGE_BASE_URL}${movieDetail.backdrop_path})`,
-          }}
-        >
-          <div className={`${detailCSS.filter}`}>
-            <div className={`${detailCSS.content_detail}`}>
-              <div>
-                <img
-                  src={`${IMAGE_BASE_URL}${movieDetail.poster_path}`}
-                  className={`${detailCSS.poster}`}
-                ></img>
-              </div>
-              <div className={`${detailCSS.content_detail_info}`}>
-                <div className={`${detailCSS.content_detail_info_title}`}>
-                  {movieDetail.title}
-                </div>
-                <div className={`${detailCSS.content_detail_info_facts}`}>
-                  <div>
-                    {genres.map((genre) => (
-                      <span key={genre.id}>·{genre.name}</span>
-                    ))}
-                  </div>
-                  <div>{movieDetail.runtime}m</div>
-                  {/* <div>인기도: {movieDetail.popularity}</div> */}
-                </div>
-                <div className={`${detailCSS.content_detail_tagline}`}>
-                  {movieDetail.tagline}
-                </div>
-                <div>개요</div>
-                <div>{movieDetail.overview}</div>
-                <MovieTrailer videos={trailer}></MovieTrailer>
-              </div>
-            </div>
-          </div>
-        </div>
+        <Detail id={movieDetail.id} backdrop={movieDetail.backdrop_path} poster={movieDetail.poster_path} title={movieDetail.title} genres={genres} runtime={movieDetail.runtime} tagline={movieDetail.tagline} overview={movieDetail.overview} />
         <div id="credit">
           <h2>배우</h2>
           <CreditSwiper credit={credit}></CreditSwiper>

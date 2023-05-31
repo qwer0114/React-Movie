@@ -1,17 +1,15 @@
 import trailerCSS from "../../styles/trailer.module.css";
 import ModalVideo from "react-modal-video";
 import { useState, useEffect } from "react";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faPlay } from "@fortawesome/free-solid-svg-icons"
+
 function Video({ videoKey }) {
   const [isOpen, setOpen] = useState(false);
   console.log(videoKey);
   return (
     <div className={`${trailerCSS.video}`}>
-      {/* <iframe
-        allowFullScreen
-        className={`${trailerCSS.iframe}`}
-        src={`https://www.youtube.com/embed/${videoKey}?autoplay=1`}
-        style={{ width: "520px", height: "280px" }}
-      ></iframe> */}
+
       <ModalVideo
         channel="youtube"
         autoplay
@@ -19,6 +17,7 @@ function Video({ videoKey }) {
         videoId={videoKey}
         onClose={() => setOpen(false)}
       />
+      <h2>Trailer</h2>
       <div
         className={`${trailerCSS.thumbnail}`}
         style={{
@@ -30,7 +29,7 @@ function Video({ videoKey }) {
             setOpen(true);
           }}
         >
-          영상보러가기
+          <FontAwesomeIcon icon={faPlay} className={`${trailerCSS.play}`} />
         </a>
       </div>
     </div>
