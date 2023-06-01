@@ -7,6 +7,7 @@ import movieCSS from "../styles/movie.module.css";
 import "../styles/style.css";
 import MovieSwiper from "../components/MovieComponents/MovieSwiper";
 import Navbar from "../components/navbar";
+import MainMovie from "../components/MovieComponents/MainMovie";
 
 function Home() {
   const API_Key = "e57cb5455543dca5e39dbdf67e3877a8";
@@ -14,7 +15,7 @@ function Home() {
   const [popularMovies, setpopularMovies] = useState([]);
   const [topRatedMovies, setTopRatedMovies] = useState([]);
   const [upComingMovies, setUpComingMovies] = useState([]);
-
+  const [images, setImages] = useState([]);
   const getMovies = async () => {
     const popular = await fetch(
       `${API_URL}trending/movie/week?api_key=${API_Key}&language=ko-KR`
@@ -34,6 +35,13 @@ function Home() {
     );
     const upComingJson = await upComing.json();
     setUpComingMovies(upComingJson.results);
+
+    const image = await fetch(
+      `${API_URL}movie/${popularJson.results[0].id}/images?api_key=${API_Key}`
+    );
+    const json2 = await image.json();
+    setImages(json2);
+    console.log(json2);
   };
 
   useEffect(() => {
@@ -43,6 +51,7 @@ function Home() {
   return (
     <div className="layout">
       <Navbar></Navbar>
+      <MainMovie image={images} movie={popularMovies[0]} />
       <div className="movies">
         <div className={movieCSS.movieChart}>
           <h2>Popular</h2>

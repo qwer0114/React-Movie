@@ -5,6 +5,7 @@ import { async } from "q";
 import movieCSS from "../styles/movie.module.css";
 import "../styles/style.css";
 import DramaSwiper from "../components/DramaComponents/DramaSwiper";
+import MainMovie from "../components/MovieComponents/MainMovie";
 
 function Disney() {
   const API_Key = "e57cb5455543dca5e39dbdf67e3877a8";
@@ -14,6 +15,7 @@ function Disney() {
   const [KRmovies, setKRMovies] = useState([]);
   const [drama, setDrama] = useState([]);
   const [Kdrama, setKDrama] = useState([]);
+  const [images, setImages] = useState([]);
 
   const getMovies = async () => {
     const movies = await fetch(
@@ -21,6 +23,12 @@ function Disney() {
     );
     const json = await movies.json();
     setMovies(json.results);
+    const image = await fetch(
+      `${API_URL}movie/${json.results[0].id}/images?api_key=${API_Key}`
+    );
+    const json2 = await image.json();
+    setImages(json2);
+    console.log(json2);
   };
 
   const getKRMovies = async () => {
@@ -57,6 +65,7 @@ function Disney() {
   return (
     <div className="layout">
       <Navbar></Navbar>
+      <MainMovie image={images} movie={movies[0]} />
       <div className="movies">
         <div className={movieCSS.movieChart}>
           <h2>Popular</h2>

@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import Navbar from "../components/navbar";
+import MainMovie from "../components/MovieComponents/MainMovie";
 import MovieSwiper from "../components/MovieComponents/MovieSwiper";
 import { async } from "q";
 import movieCSS from "../styles/movie.module.css";
@@ -14,6 +15,9 @@ function Netflix() {
   const [KRmovies, setKRMovies] = useState([]);
   const [drama, setDrama] = useState([]);
   const [Kdrama, setKDrama] = useState([]);
+  const [images, setImages] = useState([]);
+
+  const index = Math.floor(Math.random() * 20);
 
   const getMovies = async () => {
     const movies = await fetch(
@@ -21,6 +25,14 @@ function Netflix() {
     );
     const json = await movies.json();
     setMovies(json.results);
+    console.log(json.results);
+
+    const image = await fetch(
+      `${API_URL}movie/${json.results[0].id}/images?api_key=${API_Key}`
+    );
+    const json2 = await image.json();
+    setImages(json2);
+    console.log(json2);
   };
 
   const getKRMovies = async () => {
@@ -37,7 +49,6 @@ function Netflix() {
     );
     const json = await drama.json();
     setDrama(json.results);
-    console.log(json);
   };
 
   const getKDrama = async () => {
@@ -46,7 +57,6 @@ function Netflix() {
     );
     const json = await drama.json();
     setKDrama(json.results);
-    console.log(json);
   };
 
   useEffect(() => {
@@ -58,6 +68,7 @@ function Netflix() {
   return (
     <div className="layout">
       <Navbar></Navbar>
+      <MainMovie image={images} movie={movies[0]} />
       <div className="movies">
         <div className={movieCSS.movieChart}>
           <h2>Popular</h2>

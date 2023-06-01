@@ -5,6 +5,7 @@ body {
   background-image: url("../img/cool-background.png");
   color: white;
   position: relative;
+  overflow-x: hidden;
 }
 #root {
   width: 100%;
@@ -25,10 +26,6 @@ body {
 a {
   color: white;
   text-decoration: none;
-}
-
-a:hover {
-  font-size: 20px;
 }
 
 ul {

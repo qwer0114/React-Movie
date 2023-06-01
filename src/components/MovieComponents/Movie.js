@@ -8,11 +8,13 @@ function Movie({ title, posterUrl, id }) {
   const IMAGE_BASE_URL = "https://image.tmdb.org/t/p/w200/";
   return (
     <div className={`movie ${movie.movie}`} id={id}>
-      <img
-        src={`${IMAGE_BASE_URL}${posterUrl}`}
-        alt="Title"
-        className={` ${movie.poster}`}
-      ></img>
+      <Link to={`/movie/${id}`} className={movie.movieTitle}>
+        <img
+          src={`${IMAGE_BASE_URL}${posterUrl}`}
+          alt="Title"
+          className={` ${movie.poster}`}
+        ></img>
+      </Link>
       <h2>
         <Link to={`/movie/${id}`} className={movie.movieTitle}>
           {title}
